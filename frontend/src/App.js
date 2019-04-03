@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
 import * as signalR from '@aspnet/signalr';
+import { Editor, EditorState } from 'draft-js';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: '', messages: []};
+    this.state = {
+      value: '',
+      messages: [],
+      editorState: EditorState.createEmpty(),
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.ping = this.ping.bind(this);
     this.submitMessage = this.submitMessage.bind(this);
+
+    this.onChange = (editorState) => this.setState({ editorState });
   }
 
   async componentDidMount() {
@@ -46,7 +53,7 @@ class App extends Component {
   }
 
   submitMessage(event) {
-    if(event.keyCode == 13) {
+    if(event.keyCode === 13) {
       this.state.clientChat.send('SendMessage', event.target.value);
       this.setState({ value: '' });
     }
@@ -69,6 +76,7 @@ class App extends Component {
             )
         }
         </div>
+        <Editor editorState={this.state.editorState} onChange={this.onChange} />
       </div>
     );
   }
