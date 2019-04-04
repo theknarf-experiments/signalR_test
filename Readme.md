@@ -1,3 +1,5 @@
+![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)
+
 # SignalR test application
 
 SignalR test application created in a meetup based on the talk by TobbenTM ([talk](https://signalr.xn--nrd-yla.no/) - [example code](https://github.com/TobbenTM/signalR_starter))
